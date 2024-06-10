@@ -7,11 +7,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello"
+    return "Hello kubpoom"
 
 @app.route('/data')
 def get_data():
-    return "data"
+    return "data Mysql"
 
 
 if __name__ == '__main__':
