@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0 
+    container_name: dbmysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: customer_service
+      MYSQL_USER: ds
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    networks:
+      - myapi
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: ./app
+    container_name: service_customer
+    volumes:
+      - ./app:/app
+    ports:
+      - "5000:80"
+    networks:
+      - myapi
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+networks:
+  myapi:
