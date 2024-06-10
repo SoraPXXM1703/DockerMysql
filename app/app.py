@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello kubpoom"
+    return "Hello Mydata"
 
 @app.route('/data')
 def get_data():
