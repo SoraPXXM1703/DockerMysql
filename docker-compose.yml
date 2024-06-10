@@ -23,7 +23,7 @@ services:
     volumes:
       - ./app:/app
     ports:
-      - "5000:80"
+      - "5001:80"
     networks:
       - myapi
     depends_on:
