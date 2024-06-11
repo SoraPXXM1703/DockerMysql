@@ -33,6 +33,11 @@ def get_all_data():
 def name():
     return "YORNNAME....>>"
 
+
+@app.route('/po')
+def name():
+    return "YORNNAME....>>"
+
 @app.route('/<name>')
 def hello(name):
     return f"♟︎WELLOME > {escape(name)}"
