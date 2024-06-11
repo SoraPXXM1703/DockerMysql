@@ -9,7 +9,8 @@ COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install flask_sqlalchemy
+RUN pip install --upgrade Werkzeug==2.0.2 Flask==2.0.1
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
