@@ -21,11 +21,11 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-@app.route('/data/B')
+@app.route('/B')
 def get_buy_data():
-    mycursor.execute("SELECT * FROM b_customer JOIN b_listpay ON b_customer.ID = b_listpay.Customer_Pay")
-    result1 = mycursor.fetchall()
-    data2 = [{row[1],row[2],row[3],row[4],row[5]}for row in result1]
+    mycursor.execute("SELECT * FROM b_listpay JOIN b_customer ON b_listpay.Customer_Pay = b_customer.ID")
+    results = mycursor.fetchall()
+    data2 = [{'a':row[14],'b':row[3]}for row in results]
     return jsonify(data2)
 
 
