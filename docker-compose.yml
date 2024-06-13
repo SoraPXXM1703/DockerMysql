@@ -11,6 +11,8 @@ services:
       MYSQL_DATABASE: customer_service
       # MYSQL_USER: ds
       MYSQL_PASSWORD: root
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
       - "3306:3306"
     networks:
@@ -35,6 +37,8 @@ services:
       environment:
         PMA_HOST: db
         MYSQL_ROOT_PASSWORD: root
+        PMA_PHPMYADMIN_CHARSET: utf8mb4
+        PMA_PHPMYADMIN_LANG: thai
       ports:
         - "8181:80"
       networks:

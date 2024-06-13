@@ -8,141 +8,57 @@ from flask import Flask, jsonify
 import mysql.connector
 
 app = Flask(__name__)
-""" 
+
+
+
 # เชื่อมต่อฐานข้อมูล MySQL โดยใช้ค่าคงที่
 mydb = mysql.connector.connect(
-  host="0.0.0.0",
+  host="db",
   user="root",
-  password="root",
+  password="12345",
   database="books_system"
-) """
+)
 
-# สร้าง Cursor object เพื่อทำงานกับ MySQL
-""" mycursor = mydb.cursor()
- """
-# Endpoint สำหรับดึงข้อมูลทั้งหมดจากฐานข้อมูล
-""" @app.route('/data', methods=['GET'])
+mycursor = mydb.cursor()
+
+@app.route('/data/B')
+def get_buy_data():
+    mycursor.execute("SELECT * FROM b_customer JOIN b_listpay ON b_customer.ID = b_listpay.Customer_Pay")
+    result1 = mycursor.fetchall()
+    data2 = [{row[1],row[2],row[3],row[4],row[5]}for row in result1]
+    return jsonify(data2)
+
+
+@app.route('/data', methods=['GET'])
 def get_all_data():
-    mycursor.execute("SELECT * FROM your_table")
-    result = mycursor.fetchall()
-    data = [{'id': row[0], 'name': row[1]} for row in result]
-    return jsonify(data)
- """
+    mycursor.execute("SELECT * FROM `b_books`")
+    result2 = mycursor.fetchall()
+    data0 = [{'name': row[3], 'price book': row[16], 'store book': row[19]} for row in result2]
+    return jsonify(data0)
+
 
 @app.route('/')
 def name():
     return "YORNNAME....>>"
 
 
-@app.route('/po')
-def name():
-    return "YORNNAME....>>"
-
-@app.route('/<name>')
-def hello(name):
-    return f"♟︎WELLOME > {escape(name)}"
-
-
-
-""" # กำหนดการเชื่อมต่อ MySQL
-mydb = mysql.connector.connect(
-    host="db",
-    user="root",
-    password="12345",  # รหัสผ่าน MySQL root user
-    database="books_system"   # ชื่อฐานข้อมูลที่คุณต้องการเชื่อมต่อ
-)
-
-@app.route('/users', methods=['GET'])
-def get_users():
-    cursor = mydb.cursor()
-    cursor.execute("SELECT * FROM users")
-    result = cursor.fetchall()
-    return jsonify(result) """
+@app.route('/data/<book>')
+def get_data_name(book):
+    mycursor.execute("SELECT * FROM `b_books`")
+    result = mycursor.fetchall()
+    if (escape(book) == 'books'):   
+        data1 = [{f'Name Book' : row[3] + ' (' + row[4] + ')' , 'BookID' : row[0] , 'Price' : row[16]} for row in result]
+    elif (escape(name) == 'barcode'):
+        data1 = [{f'Name Book' : row[3] + ' (' + row[4] + ')' , 'BookID' : row[0] , 'Bracode' : row[8] , 'Brscode Ebook' : row[9]} for row in result]
+    else:
+        return "<<<End>>>"
     
-
-
-
-""" app = Flask(__name__)
-
-
-books = {"title": "หนังสือทดสอบ", "price": 100, "buyer": "John Doe"}
-
-
-@app.route('/books', methods=['GET'])
-def get_books():
-    return jsonify({'books': books})
-
-@app.route('/books', methods=['POST'])
-def add_book():
-    book_data = request.get_json()
-    books.append(book_data)
-    return jsonify({'message': 'Book added successfully'})
- """
-
-""" @app.route('/')
-def name():
-    return "YORNNAME....>>"
-
-@app.get('/login')
-def login_get():
-    return show_the_login_form()
-
-@app.post('/login')
-def login_post():
-    return do_the_login()
-
-
+    return jsonify(data1)
 
 @app.route('/<name>')
 def hello(name):
-    return f"♟︎WELLOME > {escape(name)}"
-
-@app.route('/<int:id>')
-def id(id):
-    return f"♟︎Id >>> {escape(id)}"
-
-
-@app.route('/data')
-def get_data():
-    return "data Mysql2003" """
-
-
-
+    return f"WELLOME > {escape(name)}"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
 
-
-
-
-
-
-#ตัวนี้ยังไม่ทดลองใช้งาน
-
-""" from flask import Flask, jsonify
-import mysql.connector
-
-app = Flask(__name__)
-
-# เชื่อมต่อฐานข้อมูล MySQL โดยใช้ค่าคงที่
-mydb = mysql.connector.connect(
-  host="db",
-  user="your_user",
-  password="your_password",
-  database="your_database"
-)
-
-# สร้าง Cursor object เพื่อทำงานกับ MySQL
-mycursor = mydb.cursor()
-
-# Endpoint สำหรับดึงข้อมูลทั้งหมดจากฐานข้อมูล
-@app.route('/data', methods=['GET'])
-def get_all_data():
-    mycursor.execute("SELECT * FROM your_table")
-    result = mycursor.fetchall()
-    data = [{'id': row[0], 'name': row[1]} for row in result]
-    return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
- """
