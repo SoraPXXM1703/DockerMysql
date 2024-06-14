@@ -21,12 +21,14 @@ services:
       - ./data:/var/lib/mysql
 
   web:
-    build: ./app
+    # build: ./app
+    image: python:3.9
     container_name: service_customer
+    #command: uvicorn app:app --host 0.0.0.0 --reload 
     volumes:
       - ./app:/app
     ports:
-      - "5001:80"
+      - "5000:5000"
     networks:
       - myapi
     depends_on:
