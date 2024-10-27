@@ -14,6 +14,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install flask_sqlalchemy
 RUN pip install --upgrade Werkzeug==2.0.2 Flask==2.0.1
+RUN pip install uvicorn fastapi
 
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=development
