@@ -19,6 +19,14 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+@app.route('/data')
+def get_data():#SELECT * FROM b_books JOIN b_listpay ON b_books.Barcode = b_listpay.Barcode
+    mycursor.execute("SELECT company_id, company_name FROM companies")
+    results = mycursor.fetchall()
+    data = []
+    for row in results:
+        data.append({'id': row[0], 'name': row[1]})
+    return jsonify(data)
 
 #test 
 @app.route('/helo')
@@ -35,15 +43,13 @@ def hello():
 def index():
     return render_template('index.html')
 
+
 """ @app.route('/test/b', methods=['POST'])
 def button_clicked():
     # ทำสิ่งที่ต้องการเมื่อปุ่มถูกคลิก
     return 'ปุ่มถูกคลิกแล้ว!' """
 
 
-
-
 if __name__ == '__main__':
-    # Flask จะรันที่ 0.0.0.0 และพอร์ต 5000
     app.run(host='0.0.0.0', port=5000 ,debug=True)
 
